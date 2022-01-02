@@ -2,45 +2,56 @@ import readlineSync from 'readline-sync';
 
 let count = 0;
 
+const MAX_COUNT = 3;
+
+const NUMBER_RANGE = {
+  MIN: 1,
+  MAX: 500,
+};
+
+const ANSWER_TYPE = {
+  YES: 'yes',
+  NO: 'no',
+};
+
 function getRandomArbitrary(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-function isCorrectAnswer(number, answer) {
-  const isEven = number % 2 === 0;
-
-  const expectedAnswer = isEven ? 'yes' : 'no';
-
-  return answer === expectedAnswer;
-}
-
-console.log('Answer "yes" if the number is even, otherwise answer "no".');
+console.log(`Answer "${ANSWER_TYPE.YES}" if the number is even, otherwise answer "${ANSWER_TYPE.NO}".`);
 
 const startGame = () => {
   count += 1;
 
-  const number = getRandomArbitrary(1, 500);
+  const number = getRandomArbitrary(NUMBER_RANGE.MIN, NUMBER_RANGE.MAX);
 
   console.log(`Question: ${number}`);
   const userAnswer = readlineSync.question('Your answer: ');
 
-  const isCorrect = isCorrectAnswer(number, userAnswer);
+  const expectedAnswer = number % 2 === 0 ? ANSWER_TYPE.YES : ANSWER_TYPE.NO;
 
-  if (isCorrect) {
-    if (count === 3) {
+  const isCorrect = userAnswer === expectedAnswer;
+
+  switch (true) {
+    case !isCorrect:
+      console.log(
+        `'${userAnswer}' is wrong answer ;(. Correct answer was '${expectedAnswer}'`,
+        '\n',
+        "Let's try again!",
+      );
+
+      break;
+
+    case count === MAX_COUNT:
       console.log('Congratulations!');
 
-      return;
-    }
+      break;
 
-    console.log('Correct!');
+    default:
+      console.log('Correct!');
 
-    startGame();
-
-    return;
+      startGame();
   }
-
-  console.log(`'${userAnswer}' is wrong answer ;(.`);
 };
 
-startGame();
+export default startGame;
