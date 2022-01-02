@@ -6,3 +6,6 @@ install:
 
 brain-games:
 	bin/brain-games.js
+
+lint:
+	npx eslint .
