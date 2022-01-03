@@ -1,16 +1,12 @@
 import { MAX_ROUND } from './constants.js';
 import makeGreeting from './make-greeting.js';
 
-let round = 0;
-
 export default (executeGame, setDescriptionGame) => {
   const userName = makeGreeting();
 
   setDescriptionGame();
 
-  const iter = () => {
-    round += 1;
-
+  const iter = (round) => {
     const { userAnswer, expectedAnswer } = executeGame();
 
     const isCorrect = userAnswer === expectedAnswer;
@@ -33,9 +29,9 @@ export default (executeGame, setDescriptionGame) => {
       default:
         console.log('Correct!');
 
-        iter();
+        iter(round + 1);
     }
   };
 
-  iter();
+  iter(1);
 };
