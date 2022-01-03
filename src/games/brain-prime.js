@@ -4,16 +4,24 @@ import { getRandomInteger } from '../utils.js';
 import { NUMBER_RANGE, ANSWER_TYPE } from '../constants.js';
 
 function setDescriptionGame() {
-  console.log(`Answer "${ANSWER_TYPE.YES}" if the number is even, otherwise answer "${ANSWER_TYPE.NO}".`);
+  console.log(`Answer "${ANSWER_TYPE.YES}" if given number is prime. Otherwise answer "${ANSWER_TYPE.NO}".`);
+}
+
+function isNumberPrime(number) {
+  for (let i = 2; i < number; i += 1) {
+    if (number % i === 0) return false;
+  }
+
+  return number > 1;
 }
 
 const startGame = () => {
   const number = getRandomInteger(NUMBER_RANGE.MIN, NUMBER_RANGE.MAX);
 
-  console.log(`Question: ${number}`);
+  console.log((`Question: ${number}`));
 
   const userAnswer = readlineSync.question('Your answer: ');
-  const expectedAnswer = number % 2 === 0 ? ANSWER_TYPE.YES : ANSWER_TYPE.NO;
+  const expectedAnswer = isNumberPrime(number) ? ANSWER_TYPE.YES : ANSWER_TYPE.NO;
 
   return { userAnswer, expectedAnswer };
 };
