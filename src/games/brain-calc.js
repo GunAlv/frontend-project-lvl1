@@ -30,7 +30,7 @@ const startGame = () => {
   const number1 = getRandomInteger(NUMBER_RANGE.MIN, NUMBER_RANGE.MAX);
   const number2 = getRandomInteger(NUMBER_RANGE.MIN, NUMBER_RANGE.MAX);
   const operatorList = Object.values(OPERATORS);
-  const operator = operatorList[getRandomInteger(0, operatorList.length - 1)];
+  const operator = operatorList[getRandomInteger(0, operatorList.length)];
 
   console.log(`Question: ${number1} ${operator} ${number2}`);
 
