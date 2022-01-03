@@ -1,12 +1,10 @@
-import readlineSync from 'readline-sync';
 import { MAX_ROUND } from './constants.js';
+import makeGreeting from './make-greeting.js';
 
 let round = 0;
 
 export default (executeGame, setDescriptionGame) => {
-  console.log('Welcome to the Brain Game!');
-  const userName = readlineSync.question('May I have your name? ');
-  console.log(`Hello, ${userName}`);
+  const userName = makeGreeting();
 
   setDescriptionGame();
 
