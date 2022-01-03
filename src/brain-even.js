@@ -18,6 +18,9 @@ function getRandomArbitrary(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
+const userName = readlineSync.question('May I have your name? ');
+console.log(`Hello, ${userName}!`);
+
 console.log(`Answer "${ANSWER_TYPE.YES}" if the number is even, otherwise answer "${ANSWER_TYPE.NO}".`);
 
 const startGame = () => {
@@ -37,13 +40,13 @@ const startGame = () => {
       console.log(
         `'${userAnswer}' is wrong answer ;(. Correct answer was '${expectedAnswer}'`,
         '\n',
-        "Let's try again!",
+        `Let's try again, ${userName}!`,
       );
 
       break;
 
     case count === MAX_COUNT:
-      console.log('Congratulations!');
+      console.log(`Congratulations, ${userName}!`);
 
       break;
 
